@@ -1,0 +1,15 @@
+{% if block('doesNotExist') is defined %}
+    <div>
+        {{ block('doesNotExist')|raw }}
+    </div>
+{% endif %}
+
+{% if block('doesExist') is defined %}
+    <div>
+        {{ block('doesExist')|raw }}
+    </div>
+{% endif %}
+
+{% block doesExist %}
+    works!
+{% endblock %}
