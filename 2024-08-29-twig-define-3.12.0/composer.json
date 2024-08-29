@@ -1,0 +1,15 @@
+{
+    "name": "xvilo/2024-08-29-twig-define-3.12.0",
+    "autoload": {
+        "psr-4": {
+            "Xvilo\\20240829TwigDefine3120\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sem Schilder",
+            "email": "sem@tropical.email"
+        }
+    ],
+    "require": {}
+}
