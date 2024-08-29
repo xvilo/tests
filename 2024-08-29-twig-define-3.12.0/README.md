@@ -5,6 +5,17 @@ From 3.12.0 and onward we can not use `{% if block('doesExist') is defined %}` l
 How to reproduce:
 ```bash
 $ composer install
+$ vendor/bin/twig-linter lint templates
+  ERROR  in templates/index.html.twig (line 1)
+  >>  1      {% if block('doesNotExist') is defined %}
+  >> The "defined" test only works with simple variables. 
+      2          <div>
+      3              {{ block('doesNotExist')|raw }}
+
+                                                                                                                        
+ [WARNING] 0 Twig files have valid syntax and 1 contain errors.                                                         
+                                                                                                                        
+                                                                                                                        
 $ php run-test.php         
 Twig version: 3.12.0
 ====================== OUTPUT TWIG ========================
@@ -17,17 +28,6 @@ Twig version: 3.12.0
     works!
 ===================== END OUTPUT TWIG =====================
 
-$ vendor/bin/twig-linter lint templates
-  ERROR  in templates/index.html.twig (line 1)
-  >>  1      {% if block('doesNotExist') is defined %}
-  >> The "defined" test only works with simple variables. 
-      2          <div>
-      3              {{ block('doesNotExist')|raw }}
-
-                                                                                                                        
- [WARNING] 0 Twig files have valid syntax and 1 contain errors.                                                         
-                                                                                                                        
-                                                                                                                        
 $ php -v
 PHP 8.3.9 (cli) (built: Jul  2 2024 14:10:14) (NTS)
 Copyright (c) The PHP Group
@@ -38,18 +38,6 @@ Zend Engine v4.3.9, Copyright (c) Zend Technologies
 
 How it works:
 ```bash
-$ composer upgrade --prefer-lowest
-php run-test.php                
-Twig version: 3.11.0
-====================== OUTPUT TWIG ========================
-
-    <div>
-            works!
-
-    </div>
-
-    works!
-===================== END OUTPUT TWIG =====================
 $ vendor/bin/twig-linter lint templates
 PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /Users/xvilo/projects/tests/2024-08-29-twig-define-3.12.0/vendor/symfony/console/Command/DumpCompletionCommand.php on line 48
 
@@ -62,6 +50,18 @@ Deprecated: Using ${var} in strings is deprecated, use {$var} instead in /Users/
  [OK] All 1 Twig files contain valid syntax.                                                                            
                                                                                                                         
 
+$ composer upgrade --prefer-lowest
+php run-test.php                
+Twig version: 3.11.0
+====================== OUTPUT TWIG ========================
+
+    <div>
+            works!
+
+    </div>
+
+    works!
+===================== END OUTPUT TWIG =====================
 $ php -v
 PHP 8.3.9 (cli) (built: Jul  2 2024 14:10:14) (NTS)
 Copyright (c) The PHP Group
